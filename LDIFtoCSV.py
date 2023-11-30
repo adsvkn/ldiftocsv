@@ -52,7 +52,8 @@ dn: cn=Bill\, Kim and Family,mail=abc@example.com
 # One of the issues with this is that a lot of spreadsheet programs will only support
 # a maximum number of columns. Suppose a multivalued attribute had 200 or so values.
 # This would eat up 200 columns. OpenOffice's maximum number of columns is 1024.
-
+
+
 # A handler that simply throws away any logging messages sent to it
 class NullHandler(logging.Handler):
   def emit(self,record):
@@ -129,11 +130,11 @@ class LDIFCSVParser(LDIFParser):
         while( i < numberOfTimesToPrint ):
 
           if( i < len(entry[attributeName])):
-
-            if( self.check_printable(entry[attributeName][i]) ):
-              self.defaultOutput.write(self.textDelimiter + entry[attributeName][i] + self.textDelimiter + self.fieldSeparatorCharacter)
-            else:
-              self.defaultOutput.write(self.textDelimiter + repr(entry[attributeName][i]) + self.textDelimiter + self.fieldSeparatorCharacter)
+            self.defaultOutput.write(self.textDelimiter + entry[attributeName][i] + self.textDelimiter + self.fieldSeparatorCharacter)
+            #if( self.check_printable(entry[attributeName][i]) ):
+            #  self.defaultOutput.write(self.textDelimiter + entry[attributeName][i] + self.textDelimiter + self.fieldSeparatorCharacter)
+            #else:
+            #  self.defaultOutput.write(self.textDelimiter + repr(entry[attributeName][i]) + self.textDelimiter + self.fieldSeparatorCharacter)
           else:
             self.defaultOutput.write(self.textDelimiter + self.textDelimiter + self.fieldSeparatorCharacter)
 
@@ -275,7 +276,8 @@ def usage():
   sys.stdout.write("\t\t  Do you want to have 20 columns each with the same heading objectClass or do you want to limit it.\n") 
   
   sys.stdout.write("\n")
-  """
+
+  """
 
 # Primary function call 
 def main():
